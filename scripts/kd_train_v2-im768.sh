@@ -17,6 +17,7 @@ StartTime=$(date +%s)
 
 CUDA_VISIBLE_DEVICES=1 accelerate launch src/kd_train_text_to_image.py \
   --pretrained_model_name_or_path $MODEL_NAME \
+  --replace_silu_with_identity False \
   --train_data_dir $TRAIN_DATA_DIR\
   --use_ema \
   --resolution 768 --center_crop --random_flip \
