@@ -10,18 +10,18 @@ from utils.misc import get_file_list_from_csv, change_img_size
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model_id", type=str, default="nota-ai/bk-sdm-small")    
-    parser.add_argument("--save_dir", type=str, default="./results/bk-sdm-small",
+    parser.add_argument("--model_id", type=str, default="nota-ai/bk-sdm-tiny")    
+    parser.add_argument("--save_dir", type=str, default="./results/kd_bk_tiny",
                         help="$save_dir/{im256, im512} are created for saving 256x256 and 512x512 images")
-    parser.add_argument("--unet_path", type=str, default=None)   
-    parser.add_argument("--data_list", type=str, default="./data/mscoco_val2014_30k/metadata.csv")    
+    parser.add_argument("--unet_path", type=str, default='./results/kd_bk_tiny')   
+    parser.add_argument("--data_list", type=str, default="./data/pokemon/test/metadata.csv")    
     parser.add_argument("--num_images", type=int, default=1)
     parser.add_argument("--num_inference_steps", type=int, default=25)
-    parser.add_argument('--device', type=str, default='cuda:0', help='Device to use, cuda:gpu_number or cpu')
+    parser.add_argument('--device', type=str, default='cuda:1', help='Device to use, cuda:gpu_number or cpu')
     parser.add_argument("--seed", type=int, default=1234)
-    parser.add_argument("--img_sz", type=int, default=512)
-    parser.add_argument("--img_resz", type=int, default=256)
-    parser.add_argument("--batch_sz", type=int, default=1)
+    parser.add_argument("--img_sz", type=int, default=128)
+    # parser.add_argument("--img_resz", type=int, default=256)
+    parser.add_argument("--batch_sz", type=int, default=128)
 
     args = parser.parse_args()
     return args
@@ -42,8 +42,8 @@ if __name__ == "__main__":
 
     save_dir_src = os.path.join(args.save_dir, f'im{args.img_sz}') # for model's raw output images
     os.makedirs(save_dir_src, exist_ok=True)
-    save_dir_tgt = os.path.join(args.save_dir, f'im{args.img_resz}') # for resized images for ms-coco benchmark
-    os.makedirs(save_dir_tgt, exist_ok=True)       
+    # save_dir_tgt = os.path.join(args.save_dir, f'im{args.img_resz}') # for resized images for ms-coco benchmark
+    # os.makedirs(save_dir_tgt, exist_ok=True)       
 
     file_list = get_file_list_from_csv(args.data_list)
     params_str = pipeline.get_sdm_params()
@@ -67,5 +67,5 @@ if __name__ == "__main__":
 
     pipeline.clear()
     
-    change_img_size(save_dir_src, save_dir_tgt, args.img_resz)
+    # change_img_size(save_dir_src, save_dir_tgt, args.img_resz)
     print(f"{(time.perf_counter()-t0):.2f} sec elapsed")

@@ -29,6 +29,7 @@ import accelerate
 import datasets
 import numpy as np
 import torch
+import torch.nn as nn
 import torch.nn.functional as F
 import torch.utils.checkpoint
 import transformers
@@ -75,6 +76,16 @@ def add_hook(net, mem, mapping_layers):
         if n in mapping_layers:
             m.register_forward_hook(get_activation(mem, n))
 
+
+def replace_activations(model):
+    for child_name, child in model.named_children():
+        if isinstance(child, nn.SiLU):  # Replace SiLU specifically, or adapt for other types if necessary
+            setattr(model, child_name, nn.Identity())
+        elif len(list(child.children())) > 0:
+            replace_activations(child)
+
+
+
 def copy_weight_from_teacher(unet_stu, unet_tea, student_type):
 
     connect_info = {} # connect_info['TO-student'] = 'FROM-teacher'
@@ -86,7 +97,8 @@ def copy_weight_from_teacher(unet_stu, unet_tea, student_type):
         connect_info['up_blocks.2.attentions.1.'] = 'up_blocks.2.attentions.2.'
         connect_info['up_blocks.3.resnets.1.'] = 'up_blocks.3.resnets.2.'
         connect_info['up_blocks.3.attentions.1.'] = 'up_blocks.3.attentions.2.'
-    elif student_type in ["bk_tiny"]:
+    # elif student_type in ["bk_tiny"]:
+    else:
         connect_info['up_blocks.0.resnets.0.'] = 'up_blocks.1.resnets.0.'
         connect_info['up_blocks.0.attentions.0.'] = 'up_blocks.1.attentions.0.'
         connect_info['up_blocks.0.resnets.1.'] = 'up_blocks.1.resnets.2.'
@@ -101,8 +113,8 @@ def copy_weight_from_teacher(unet_stu, unet_tea, student_type):
         connect_info['up_blocks.2.attentions.0.'] = 'up_blocks.3.attentions.0.'
         connect_info['up_blocks.2.resnets.1.'] = 'up_blocks.3.resnets.2.'
         connect_info['up_blocks.2.attentions.1.'] = 'up_blocks.3.attentions.2.'       
-    else:
-        raise NotImplementedError
+    # else:
+    #     raise NotImplementedError
 
 
     for k in unet_stu.state_dict().keys():
@@ -131,6 +143,14 @@ def parse_args():
         required=True,
         help="Path to pretrained model or model identifier from huggingface.co/models.",
     )
+    parser.add_argument(
+        "--replace_silu_with_identity",
+        type=bool,
+        default=False,
+        required=False,
+        help="Whether to replace SiLU with Identity in the Student UNet model.",
+    )
+
     parser.add_argument(
         "--revision",
         type=str,
@@ -342,7 +362,7 @@ def parse_args():
     )
 
     parser.add_argument("--unet_config_path", type=str, default="./src/unet_config")     
-    parser.add_argument("--unet_config_name", type=str, default="bk_small", choices=["bk_base", "bk_small", "bk_tiny"])   
+    parser.add_argument("--unet_config_name", type=str, default="bk_tiny")   
     parser.add_argument("--lambda_sd", type=float, default=1.0, help="weighting for the denoising task loss")  
     parser.add_argument("--lambda_kd_output", type=float, default=1.0, help="weighting for output KD loss")  
     parser.add_argument("--lambda_kd_feat", type=float, default=1.0, help="weighting for feature KD loss")  
@@ -446,6 +466,12 @@ def main():
     # Copy weights from teacher to student
     if args.use_copy_weight_from_teacher:
         copy_weight_from_teacher(unet, unet_teacher, args.unet_config_name)
+
+
+
+    # replace SiLU with Identity 
+    if args.replace_silu_with_identity:
+        replace_activations(unet) 
    
 
     # Freeze student's vae and text_encoder and teacher's unet
@@ -543,13 +569,20 @@ def main():
     print("*** load dataset: start")
     t0 = time.time()
     dataset = load_dataset("imagefolder", data_dir=args.train_data_dir, split="train")
+    # dataset = load_dataset("imagefolder", data_dir=args.train_data_dir)
     print(f"*** load dataset: end --- {time.time()-t0} sec")
 
     # Preprocessing the datasets.
     column_names = dataset.column_names
+    # print(column_names)
+    # exit()
+
     image_column = column_names[0]
     caption_column = column_names[1]
 
+    
+
+    
     # Preprocessing the datasets.
     # We need to tokenize input captions and transform the images.
     def tokenize_captions(examples, is_train=True):
@@ -705,7 +738,8 @@ def main():
         mapping_layers_tea = copy.deepcopy(mapping_layers)
         mapping_layers_stu = copy.deepcopy(mapping_layers)
 
-    elif args.unet_config_name in ["bk_tiny"]:
+    # elif args.unet_config_name in ["bk_tiny"]:
+    else:
         mapping_layers_tea = ['down_blocks.0', 'down_blocks.1', 'down_blocks.2.attentions.1.proj_out',
                                 'up_blocks.1', 'up_blocks.2', 'up_blocks.3']    
         mapping_layers_stu = ['down_blocks.0', 'down_blocks.1', 'down_blocks.2.attentions.0.proj_out',

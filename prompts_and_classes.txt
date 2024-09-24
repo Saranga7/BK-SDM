@@ -1,0 +1,215 @@
+Classes
+
+subject_name,class
+Abra,Abra
+Aerodactyl,Aerodactyl
+Alakazam,Alakazam
+Arbok,Arbok
+Arcanine,Arcanine
+Articuno,Articuno
+Beedrill,Beedrill
+Bellsprout,Bellsprout
+Blastoise,Blastoise
+Bulbasaur,Bulbasaur
+Butterfree,Butterfree
+Caterpie,Caterpie
+Chansey,Chansey
+Charizard,Charizard
+Charmander,Charmander
+Charmeleon,Charmeleon
+Clefable,Clefable
+Clefairy,Clefairy
+Cloyster,Cloyster
+Cubone,Cubone
+Dewgong,Dewgong
+Diglett,Diglett
+Ditto,Ditto
+Dodrio,Dodrio
+Doduo,Doduo
+Dragonair,Dragonair
+Dragonite,Dragonite
+Dratini,Dratini
+Drowzee,Drowzee
+Dugtrio,Dugtrio
+Eevee,Eevee
+Ekans,Ekans
+Electabuzz,Electabuzz
+Electrode,Electrode
+Exeggcute,Exeggcute
+Exeggutor,Exeggutor
+Farfetchd,Farfetchd
+Fearow,Fearow
+Flareon,Flareon
+Gastly,Gastly
+Gengar,Gengar
+Geodude,Geodude
+Gloom,Gloom
+Golbat,Golbat
+Goldeen,Goldeen
+Golduck,Golduck
+Golem,Golem
+Graveler,Graveler
+Grimer,Grimer
+Growlithe,Growlithe
+Gyarados,Gyarados
+Haunter,Haunter
+Hitmonchan,Hitmonchan
+Hitmonlee,Hitmonlee
+Horsea,Horsea
+Hypno,Hypno
+Ivysaur,Ivysaur
+Jigglypuff,Jigglypuff
+Jolteon,Jolteon
+Jynx,Jynx
+Kabuto,Kabuto
+Kabutops,Kabutops
+Kadabra,Kadabra
+Kakuna,Kakuna
+Kangaskhan,Kangaskhan
+Kingler,Kingler
+Koffing,Koffing
+Krabby,Krabby
+Lapras,Lapras
+Lickitung,Lickitung
+Machamp,Machamp
+Machoke,Machoke
+Machop,Machop
+Magikarp,Magikarp
+Magmar,Magmar
+Magnemite,Magnemite
+Magneton,Magneton
+Mankey,Mankey
+Marowak,Marowak
+Meowth,Meowth
+Metapod,Metapod
+Mew,Mew
+Mewtwo,Mewtwo
+Moltres,Moltres
+MrMime,MrMime
+Muk,Muk
+Nidoking,Nidoking
+Nidoqueen,Nidoqueen
+Nidorina,Nidorina
+Nidorino,Nidorino
+Ninetales,Ninetales
+Oddish,Oddish
+Omanyte,Omanyte
+Omastar,Omastar
+Onix,Onix
+Paras,Paras
+Parasect,Parasect
+Persian,Persian
+Pidgeot,Pidgeot
+Pidgeotto,Pidgeotto
+Pidgey,Pidgey
+Pikachu,Pikachu
+Pinsir,Pinsir
+Poliwag,Poliwag
+Poliwhirl,Poliwhirl
+Poliwrath,Poliwrath
+Ponyta,Ponyta
+Porygon,Porygon
+Primeape,Primeape
+Psyduck,Psyduck
+Raichu,Raichu
+Rapidash,Rapidash
+Raticate,Raticate
+Rattata,Rattata
+Rhydon,Rhydon
+Rhyhorn,Rhyhorn
+Sandshrew,Sandshrew
+Sandslash,Sandslash
+Scyther,Scyther
+Seadra,Seadra
+Seaking,Seaking
+Seel,Seel
+Shellder,Shellder
+Slowbro,Slowbro
+Slowpoke,Slowpoke
+Snorlax,Snorlax
+Spearow,Spearow
+Squirtle,Squirtle
+Starmie,Starmie
+Staryu,Staryu
+Tangela,Tangela
+Tauros,Tauros
+Tentacool,Tentacool
+Tentacruel,Tentacruel
+Vaporeon,Vaporeon
+Venomoth,Venomoth
+Venonat,Venonat
+Venusaur,Venusaur
+Victreebel,Victreebel
+Vileplume,Vileplume
+Voltorb,Voltorb
+Vulpix,Vulpix
+Wartortle,Wartortle
+Weedle,Weedle
+Weepinbell,Weepinbell
+Weezing,Weezing
+Wigglytuff,Wigglytuff
+Zapdos,Zapdos
+Zubat,Zubat
+Alolan_Sandslash,Alolan_Sandslash
+
+Prompts
+
+Object Prompts
+
+prompt_list = [
+'a {0} {1} in the jungle'.format(unique_token, class_token),
+'a {0} {1} in the snow'.format(unique_token, class_token),
+'a {0} {1} on the beach'.format(unique_token, class_token),
+'a {0} {1} on a cobblestone street'.format(unique_token, class_token),
+'a {0} {1} on top of pink fabric'.format(unique_token, class_token),
+'a {0} {1} on top of a wooden floor'.format(unique_token, class_token),
+'a {0} {1} with a city in the background'.format(unique_token, class_token),
+'a {0} {1} with a mountain in the background'.format(unique_token, class_token),
+'a {0} {1} with a blue house in the background'.format(unique_token, class_token),
+'a {0} {1} on top of a purple rug in a forest'.format(unique_token, class_token),
+'a {0} {1} with a wheat field in the background'.format(unique_token, class_token),
+'a {0} {1} with a tree and autumn leaves in the background'.format(unique_token, class_token),
+'a {0} {1} with the Eiffel Tower in the background'.format(unique_token, class_token),
+'a {0} {1} floating on top of water'.format(unique_token, class_token),
+'a {0} {1} floating in an ocean of milk'.format(unique_token, class_token),
+'a {0} {1} on top of green grass with sunflowers around it'.format(unique_token, class_token),
+'a {0} {1} on top of a mirror'.format(unique_token, class_token),
+'a {0} {1} on top of the sidewalk in a crowded street'.format(unique_token, class_token),
+'a {0} {1} on top of a dirt road'.format(unique_token, class_token),
+'a {0} {1} on top of a white rug'.format(unique_token, class_token),
+'a red {0} {1}'.format(unique_token, class_token),
+'a purple {0} {1}'.format(unique_token, class_token),
+'a shiny {0} {1}'.format(unique_token, class_token),
+'a wet {0} {1}'.format(unique_token, class_token),
+'a cube shaped {0} {1}'.format(unique_token, class_token)
+]
+
+Live Subject Prompts
+
+prompt_list = [
+'a {0} {1} in the jungle'.format(unique_token, class_token),
+'a {0} {1} in the snow'.format(unique_token, class_token),
+'a {0} {1} on the beach'.format(unique_token, class_token),
+'a {0} {1} on a cobblestone street'.format(unique_token, class_token),
+'a {0} {1} on top of pink fabric'.format(unique_token, class_token),
+'a {0} {1} on top of a wooden floor'.format(unique_token, class_token),
+'a {0} {1} with a city in the background'.format(unique_token, class_token),
+'a {0} {1} with a mountain in the background'.format(unique_token, class_token),
+'a {0} {1} with a blue house in the background'.format(unique_token, class_token),
+'a {0} {1} on top of a purple rug in a forest'.format(unique_token, class_token),
+'a {0} {1} wearing a red hat'.format(unique_token, class_token),
+'a {0} {1} wearing a santa hat'.format(unique_token, class_token),
+'a {0} {1} wearing a rainbow scarf'.format(unique_token, class_token),
+'a {0} {1} wearing a black top hat and a monocle'.format(unique_token, class_token),
+'a {0} {1} in a chef outfit'.format(unique_token, class_token),
+'a {0} {1} in a firefighter outfit'.format(unique_token, class_token),
+'a {0} {1} in a police outfit'.format(unique_token, class_token),
+'a {0} {1} wearing pink glasses'.format(unique_token, class_token),
+'a {0} {1} wearing a yellow shirt'.format(unique_token, class_token),
+'a {0} {1} in a purple wizard outfit'.format(unique_token, class_token),
+'a red {0} {1}'.format(unique_token, class_token),
+'a purple {0} {1}'.format(unique_token, class_token),
+'a shiny {0} {1}'.format(unique_token, class_token),
+'a wet {0} {1}'.format(unique_token, class_token),
+'a cube shaped {0} {1}'.format(unique_token, class_token)
+]

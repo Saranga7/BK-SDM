@@ -7,12 +7,12 @@ MODEL_NAME="CompVis/stable-diffusion-v1-4" # to load text encoder and image deco
 UNET_TYPE="nota-ai/bk-sdm-base" # to load unet
 
 IDENTIFIER_NAME="sks11df" # arbitrary word without meaning
-SUBJECT_NAME="dog2" # 1st column value in https://github.com/google/dreambooth/blob/main/dataset/prompts_and_classes.txt#L1-L33
-CLASS_NAME="dog" # 2nd column value in https://github.com/google/dreambooth/blob/main/dataset/prompts_and_classes.txt#L1-L33
+SUBJECT_NAME="Pikachu" # 1st column value in https://github.com/google/dreambooth/blob/main/dataset/prompts_and_classes.txt#L1-L33
+CLASS_NAME="Pikachu" # 2nd column value in https://github.com/google/dreambooth/blob/main/dataset/prompts_and_classes.txt#L1-L33
 
-DATA_DIR="./data/dreambooth/dataset/$SUBJECT_NAME"
-CLASS_DIR="./results_ft/cls_img/$CLASS_NAME"
-OUTPUT_DIR="./results_ft/full/$SUBJECT_NAME/bk-sdm-base" # please adjust it if needed
+DATA_DIR="./data/dreambooth_pokemon/dataset/$SUBJECT_NAME"
+CLASS_DIR="./my_results_ft/cls_img/$CLASS_NAME"
+OUTPUT_DIR="./my_results_ft/full/$SUBJECT_NAME/bk-sdm-base" # please adjust it if needed
 
 StartTime=$(date +%s)
 

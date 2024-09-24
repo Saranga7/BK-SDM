@@ -17,24 +17,29 @@ Assuming the below directory structure from training (scripts/kd_train.sh):
     |-- vae
 END
 
-# (A) To test with the lastest checkpoint (results/kd_bk_small/unet), use:
-IMG_DIR=./outputs/kd_bk_small/latest
-python3 src/generate.py --model_id ./results/kd_bk_small \
-    --save_dir $IMG_DIR --img_sz 512
+# # (A) To test with the lastest checkpoint (results/kd_bk_small/unet), use:
+# IMG_DIR=./outputs/kd_bk_small/latest
+# python3 src/generate.py --model_id ./results/kd_bk_small \
+#     --save_dir $IMG_DIR --img_sz 512
 
-# (B) To test with a specific checkpoint (results/kd_bk_small/checkpoint-45000/unet), use:
-IMG_DIR=./outputs/kd_bk_small/checkpoint-45000
-python3 src/generate.py \
-    --unet_path ./results/kd_bk_small/checkpoint-45000 --model_id CompVis/stable-diffusion-v1-4 \
-    --save_dir $IMG_DIR --img_sz 512
+# # (B) To test with a specific checkpoint (results/kd_bk_small/checkpoint-45000/unet), use:
+# IMG_DIR=./outputs/kd_bk_small/checkpoint-45000
+# python3 src/generate.py \
+#     --unet_path ./results/kd_bk_small/checkpoint-45000 --model_id CompVis/stable-diffusion-v1-4 \
+#     --save_dir $IMG_DIR --img_sz 512
 
-# (C) Examples for SD-v2:
-IMG_DIR=./outputs/v2_kd_bk_small/checkpoint-2
-python3 src/generate.py \
-    --unet_path ./results/v2_kd_bk_small/checkpoint-2 --model_id stabilityai/stable-diffusion-2-1 \
-    --save_dir $IMG_DIR --img_sz 768
+# # (C) Examples for SD-v2:
+# IMG_DIR=./outputs/v2_kd_bk_small/checkpoint-2
+# python3 src/generate.py \
+#     --unet_path ./results/v2_kd_bk_small/checkpoint-2 --model_id stabilityai/stable-diffusion-2-1 \
+#     --save_dir $IMG_DIR --img_sz 768
 
-IMG_DIR=./outputs/v2-base_kd_bk_small/checkpoint-2
-python3 src/generate.py \
-    --unet_path ./results/v2-base_kd_bk_small/checkpoint-2 --model_id stabilityai/stable-diffusion-2-1-base \
-    --save_dir $IMG_DIR --img_sz 512
+# IMG_DIR=./outputs/v2-base_kd_bk_small/checkpoint-2
+# python3 src/generate.py \
+#     --unet_path ./results/v2-base_kd_bk_small/checkpoint-2 --model_id stabilityai/stable-diffusion-2-1-base \
+#     --save_dir $IMG_DIR --img_sz 512
+
+
+
+IMG_DIR=./outputs/toy_ddp_bk_base/
+python3 src/generate.py --model_id ./results/toy_ddp_bk_base --save_dir $IMG_DIR --img_sz 256 --batch_sz 128 --device cuda:1  > output_logs/bk_base_generate.log 2>&1 &
